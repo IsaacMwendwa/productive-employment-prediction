@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, current_app
+from flask import Flask, render_template, request, redirect, url_for, current_app, send_from_directory
 import os
 from os.path import join, dirname, realpath
 
@@ -12,8 +12,6 @@ from math import sqrt
 from pandas import DataFrame
 from pandas import concat
 
-
-import os
 
 # convert series to supervised learning
 def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
