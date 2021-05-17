@@ -1,7 +1,7 @@
-# PREDICTIVE ANALYSIS OF PRODUCTIVE EMPLOYMENT BASED ON ECONOMIC GROWTH
+# Predictive Analysis of Productive Employment in Kenya
 
 ## Introduction
-This repo contains the full project code for a predictive analysis of productive employment in Kenya. The project uses the LSTM neural network for the time-series forecasting problem
+This project aims to create a web-based application to perform a Predictive Analysis of Productive Employment in Kenya. The project uses the LSTM neural network for the time-series forecasting problem
 
 ## Pre-requisites
 1. Anaconda from [Anaconda Organization](https://www.anaconda.com/) Installed on Local System
@@ -10,7 +10,7 @@ This repo contains the full project code for a predictive analysis of productive
 1. Fire up an Anaconda Prompt or terminal
 2. Create a Python virtual environment using conda. Specify the Python version == 3.6.9
 3. Activate conda environment
-3. Open Model Building folder and locate requirements.txt and pip install all the packages in the document
+3. Locate requirements.txt and pip install all the packages in the document
 4. Navigate to the deployment folder (containing code for deployment)
 5. Copy the path/address of the deployment folder
 6. In the terminal/prompt, cd into that directory using the command cd path. Replace path with the deployment folder's path
