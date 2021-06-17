@@ -4,11 +4,12 @@
 This project aims to create a web-based application to perform a Predictive Analysis of Productive Employment in Kenya. The project uses the LSTM neural network for the time-series forecasting problem
 
 ## Table of Contents
-* [Built With](#Built With)
+* [Build_Tools](#Build_Tools)
 * [Pre-requisites](#Pre-requisites)
-* [Instructions]
+* [Instructions](#Instructions)
+* [Contributions](#Contributions)
 
-## Built With
+## Build_Tools
 * [Python 3.6](https://www.python.org/) - The programming language used.
 * [SciKit Learn](https://scikit-learn.org/stable/) - The machine learning library used.
 * [TensorFlow](https://www.tensorflow.org/) - The machine learning framework used.
@@ -32,6 +33,6 @@ This project aims to create a web-based application to perform a Predictive Anal
 14. The predictions of the next year will then be displayed shortly thereafter
 15. Voila! You have just done a predictive analysis of wage employment in Kenya
 
-## Contributing
+## Contributions
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 Please make sure to update tests as appropriate.
