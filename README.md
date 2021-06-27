@@ -37,7 +37,6 @@ This project aims to create a web-based application to perform a Predictive Anal
 16. Voila! You have just done a predictive analysis of wage employment in Kenya
 
 ## Contributions
-## Contributions
 Contributions are welcome using pull requests. To contribute, follow these steps:
 1. Fork this repository.
 2. Create a branch: `git checkout -b <branch_name>`
