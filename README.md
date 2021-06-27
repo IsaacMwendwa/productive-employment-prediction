@@ -14,7 +14,7 @@ This project aims to create a web-based application to perform a Predictive Anal
 ## Build_Tools
 * [Python 3.6](https://www.python.org/) - The programming language used.
 * [SciKit Learn](https://scikit-learn.org/stable/) - The machine learning library used.
-* [TensorFlow](https://www.tensorflow.org/) - The machine learning framework used.
+* [TensorFlow](https://www.tensorflow.org/) - The deep learning framework used.
 
 
 ## Pre-requisites
