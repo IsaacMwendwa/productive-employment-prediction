@@ -8,7 +8,7 @@ This project aims to create a web-based application to perform a Predictive Anal
 ## Table of Contents
 * [Build_Tools](#Build_Tools)
 * [Pre-requisites](#Pre-requisites)
-* [Instructions](#Instructions)
+* [Installation](#Installation)
 * [Contributions](#Contributions)
 
 ## Build_Tools
@@ -20,7 +20,7 @@ This project aims to create a web-based application to perform a Predictive Anal
 ## Pre-requisites
 1. Anaconda from [Anaconda Organization](https://www.anaconda.com/) Installed on Local System
 
-## Instructions
+## Installation
 1. Fire up an Anaconda Prompt or terminal
 2. Create a Python virtual environment using conda. Specify the Python version == 3.6.9
 3. Activate conda environment
