@@ -37,5 +37,14 @@ This project aims to create a web-based application to perform a Predictive Anal
 16. Voila! You have just done a predictive analysis of wage employment in Kenya
 
 ## Contributions
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-Please make sure to update tests as appropriate.
+## Contributions
+Contributions are welcome using pull requests. To contribute, follow these steps:
+1. Fork this repository.
+2. Create a branch: `git checkout -b <branch_name>`
+3. Make your changes to relevant file(s)
+4. Check status of your commits: `git status`
+6. Add and commit file(s) to the repo using:
+    `git add <file(s)>`
+    `git commit -m "<message>"`
+8. Push repo to Github: `git push origin <branch_name`
+9. Create the pull request. See the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
