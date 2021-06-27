@@ -27,7 +27,7 @@ This project aims to create a web-based application to perform a Predictive Anal
 3. Locate requirements.txt and pip install all the packages in the document
 4. Navigate to the deployment folder (containing code for deployment)
 5. Copy the path/address of the deployment folder
-6. In the terminal/prompt, cd into that directory using the command cd path. Replace path with the deployment folder's path
+6. In the terminal/prompt, cd into that directory using the command ```cd path```. Replace path with the deployment folder's path
 10. Run the following command in the terminal: 
     ```Flask run```
 12. The command will fire up the Flask server
