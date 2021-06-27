@@ -28,12 +28,13 @@ This project aims to create a web-based application to perform a Predictive Anal
 4. Navigate to the deployment folder (containing code for deployment)
 5. Copy the path/address of the deployment folder
 6. In the terminal/prompt, cd into that directory using the command cd path. Replace path with the deployment folder's path
-10. Run the following command in the terminal: Flask run
-11. The command will fire up the Flask server
-12. Wait to be provided with a link on the terminal, which you can then paste in your browser to access the application
-13. Locate the test file Wage_Employment_and_GDP_2018.csv in the resulting home page, select the test file upload it to get predictions
-14. The predictions of the next year will then be displayed shortly thereafter
-15. Voila! You have just done a predictive analysis of wage employment in Kenya
+10. Run the following command in the terminal: 
+    ```Flask run```
+12. The command will fire up the Flask server
+13. Wait to be provided with a link on the terminal, which you can then paste in your browser to access the application
+14. Locate the test file Wage_Employment_and_GDP_2018.csv in the resulting home page, select the test file upload it to get predictions
+15. The predictions of the next year will then be displayed shortly thereafter
+16. Voila! You have just done a predictive analysis of wage employment in Kenya
 
 ## Contributions
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
