@@ -34,7 +34,6 @@ This project aims to create a web-based application to perform a Predictive Anal
 13. Wait to be provided with a link on the terminal, which you can then paste in your browser to access the application
 14. Locate the test file Wage_Employment_and_GDP_2018.csv in the resulting home page, select the test file upload it to get predictions
 15. The predictions of the next year will then be displayed shortly thereafter
-16. Voila! You have just done a predictive analysis of wage employment in Kenya
 
 ## Contributions
 Contributions are welcome using pull requests. To contribute, follow these steps:
