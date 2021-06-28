@@ -48,3 +48,20 @@ Contributions are welcome using pull requests. To contribute, follow these steps
     `git commit -m "<message>"`
 8. Push repo to Github: `git push origin <branch_name`
 9. Create the pull request. See the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+## Bug / Feature Request
+If you find a bug (the website couldn't handle the query and/or gave undesired results), kindly open an issue [here](https://github.com/IsaacMwendwa/Cars-Dashboard-D3-js/issues/new) by including your search query and the expected result.
+
+If you'd like to request a new function, feel free to do so by opening an issue [here](https://github.com/IsaacMwendwa/Cars-Dashboard-D3-js/issues/new). Please include sample queries and their corresponding results.
+
+
+## Authors
+
+* **[Isaac Mwendwa](https://github.com/IsaacMwendwa)**
+    
+[![github follow](https://img.shields.io/github/followers/IsaacMwendwa?label=Follow_on_GitHub)](https://github.com/IsaacMwendwa)
+
+
+See also the list of [Contributors](https://github.com/IsaacMwendwa/coordination-of-multiple-viz/contributors) who participated in this project.
+
+
