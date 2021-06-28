@@ -3,7 +3,7 @@
 ## Current App Link: https://wage-employment-prediction.herokuapp.com/
 
 ## Introduction
-This project aims to create a web-based application to perform a Predictive Analysis of Productive Employment in Kenya. The project uses the LSTM neural network for the time-series forecasting problem
+This project is aimed at creating a web-based application to perform a Predictive Analysis of Productive Employment in Kenya. The project uses the LSTM neural network for the time-series forecasting problem
 
 ## Table of Contents
 * [Build_Tools](#Build_Tools)
