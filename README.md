@@ -10,6 +10,8 @@ This project is aimed at creating a web-based application to perform a Predictiv
 * [Pre-requisites](#Pre-requisites)
 * [Installation](#Installation)
 * [Contributions](#Contributions)
+* [Bug / Feature Request](#Bug--Feature-Request)
+* [Authors](#Authors)
 
 ## Build_Tools
 * [Python 3.6](https://www.python.org/) - The programming language used.
