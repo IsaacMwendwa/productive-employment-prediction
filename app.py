@@ -54,17 +54,17 @@ def return_prediction(model,scaler,dataset):
 
     values = reframed.values
 
-    pred_X = values[:, :-1]
+    pred = values[:, :-1]
     # reshape input to be 3D [samples, timesteps, features]
-    pred_X = pred_X.reshape((pred_X.shape[0], 1, pred_X.shape[1]))
-    print(pred_X.shape)
+    pred = pred.reshape((pred.shape[0], 1, pred.shape[1]))
+    print(pred.shape)
     
 
     # make a prediction
-    yhat = model.predict(pred_X)
+    yhat = model.predict(pred)
 
     # reshaping values
-    dataset_x = pred_X.reshape((pred_X.shape[0], pred_X.shape[2]))
+    dataset_x = pred.reshape((pred.shape[0], pred.shape[2]))
 
     # invert scaling for forecast
     inv_yhat = concatenate((yhat, dataset_x[:, 1:]), axis=1)
@@ -190,11 +190,28 @@ def uploadFiles():
 
 @app.route('/prediction/<path:filePath>')
 def prediction(filePath):
+    # dummy row
+    from datetime import datetime
+    df1 = pd.DataFrame({
+        #'Year':[datetime.strptime('01-01-18', '%m-%d-%y')], 
+        #'Year':['01-01-18'],
+        'Year': ['01-01-18'],
+        'Wage_bracket_0_to_9999':[20000], 
+        'Total_number_in_wage_employment':[1002300], 
+        'Contribution_by_Gdp':[9.6], 
+        'Growth_of_GDP':[2.4], 
+        'Industry':["Agriculture, Forestry And Fishing"]
+    })
+
     #READING DATASET FOR WORKING POOR
     # CSV Column Names
     col_names = ['Year', 'Wage_bracket_0_to_9999', 'Total_number_in_wage_employment', 'Contribution_by_Gdp', 'Growth_of_GDP', 'Industry']
     # Use Pandas to parse the CSV file
-    df = read_csv(filePath, names = col_names, header=0, index_col=0)
+    df2 = read_csv(filePath, names = col_names, header=0)
+
+    # Append df2 at the end of df1
+    df = df1.append(df2, ignore_index = True)
+    df.set_index('Year', inplace=True)
 
     #Cleaning dataset
     cols = ['Wage_bracket_0_to_9999', 'Total_number_in_wage_employment']
@@ -221,7 +238,11 @@ def prediction(filePath):
     # CSV Column Names
     col_names = ['Year', 'Wage_bracket_0_to_9999', 'Total_number_in_wage_employment', 'Contribution_by_Gdp', 'Growth_of_GDP', 'Industry']
     # Use Pandas to parse the CSV file
-    df = read_csv(filePath, names = col_names, header=0, index_col=0)
+    df_total = read_csv(filePath, names = col_names, header=0, index_col=0)
+
+    # Append df2 at the end of df1
+    df = df1.append(df_total, ignore_index = True)
+    df.set_index('Year', inplace=True)
 
     #Cleaning dataset
     cols = ['Wage_bracket_0_to_9999', 'Total_number_in_wage_employment']
@@ -256,35 +277,35 @@ def prediction(filePath):
     print(len(total_employment_list))
 
     #getting results of prediction as dictionaries
-    #working_poor_dict_pred_unsorted = return_pred_dict(results = working_poor_list)
-    #total_employment_dict_pred_unsorted = return_pred_dict(results = total_employment_list)
+    working_poor_dict_pred_unsorted = return_pred_dict(results = working_poor_list)
+    total_employment_dict_pred_unsorted = return_pred_dict(results = total_employment_list)
     
     #sorting dict in descending order
-    #working_poor_dict_pred = sort_dict(dict = working_poor_dict_pred_unsorted)
-    #total_employment_dict_pred = sort_dict(dict = total_employment_dict_pred_unsorted)
+    working_poor_dict_pred = sort_dict(dict = working_poor_dict_pred_unsorted)
+    total_employment_dict_pred = sort_dict(dict = total_employment_dict_pred_unsorted)
 
 
     #computing percentage contribution by sector
-    #working_poor_percent_dict_unsorted = compute_percent(dict = working_poor_dict_pred_unsorted)
-    #total_employment_percent_dict_unsorted = compute_percent(dict = total_employment_dict_pred_unsorted)
+    working_poor_percent_dict_unsorted = compute_percent(dict = working_poor_dict_pred_unsorted)
+    total_employment_percent_dict_unsorted = compute_percent(dict = total_employment_dict_pred_unsorted)
     
     #sorting percent in descending order
-    #working_poor_percent_dict = sort_dict(dict = working_poor_percent_dict_unsorted)
-    #total_employment_percent_dict = sort_dict(dict = total_employment_percent_dict_unsorted)
+    working_poor_percent_dict = sort_dict(dict = working_poor_percent_dict_unsorted)
+    total_employment_percent_dict = sort_dict(dict = total_employment_percent_dict_unsorted)
 
     #computing percentage of working poor
-    #total_working_poor = compute_total(dict = working_poor_dict_pred_unsorted)
-    #total_employment_total = compute_total(dict = total_employment_dict_pred_unsorted)
-    #percent = (total_working_poor/total_employment_total)*100
-    #working_poor_percent = round(percent, 2)
+    total_working_poor = compute_total(dict = working_poor_dict_pred_unsorted)
+    total_employment_total = compute_total(dict = total_employment_dict_pred_unsorted)
+    percent = (total_working_poor/total_employment_total)*100
+    working_poor_percent = round(percent, 2)
     
     #rendering results
-    #return render_template('prediction.html', 
-    #    working_poor_dict_pred = working_poor_dict_pred, 
-    #    total_employment_dict_pred = total_employment_dict_pred,
-     #   working_poor_percent_dict = working_poor_percent_dict,
-     #   total_employment_percent_dict = total_employment_percent_dict,
-     #   working_poor_percent = working_poor_percent)
+    return render_template('prediction.html', 
+        working_poor_dict_pred = working_poor_dict_pred, 
+        total_employment_dict_pred = total_employment_dict_pred,
+        working_poor_percent_dict = working_poor_percent_dict,
+        total_employment_percent_dict = total_employment_percent_dict,
+        working_poor_percent = working_poor_percent)
 
 
 
