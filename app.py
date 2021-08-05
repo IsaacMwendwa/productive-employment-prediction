@@ -78,24 +78,23 @@ def return_pred_dict(results):
     # Type casting predictions to int
     #results = list(map(int, results))
     list_pred = results
-    list_industry_keys = ['Accommodation And Food Service Activities',
-       'Activities Of Extraterritorial Organizations And Bodies',
-       'Activities Of Households As Employers; Undifferentiated Goods- And Services-Producing Activities Of Households For Own Use',
-       'Administrative And Support Service Activities',
-       'Agriculture, Forestry And Fishing',
-       'Arts, Entertainment And Recreation', 'Construction',
-       'Education',
-       'Electricity, Gas, Steam And Air Conditioning Supply',
-       'Financial And Insurance Activities',
-       'Human Health And Social Work Activities',
+    list_industry_keys = ['Agriculture, Forestry And Fishing', 'Mining And Quarrying',
        'Manufacturing',
-       'Mining And Quarrying', 'Other Service Activities',
-       'Professional, Scientific And Technical Activities',
-       'Public Administration And Defence; Compulsory Social Security',
-       'Real Estate Activities',
-       'Transportation And Storage',
+       'Electricity, Gas, Steam And Air Conditioning Supply',
        'Water Supply; Sewerage, Waste Management And Remediation Activities',
-       'Wholesale And Retail Trade; Repair Of Motor Vehicles And Motorcycles']
+       'Construction',
+       'Wholesale And Retail Trade; Repair Of Motor Vehicles And Motorcycles',
+       'Transportation And Storage',
+       'Accommodation And Food Service Activities',
+       'Information And Communication',
+       'Financial And Insurance Activities', 'Real Estate Activities',
+       'Professional, Scientific And Technical Activities',
+       'Administrative And Support Service Activities',
+       'Public Administration And Defence; Compulsory Social Security',
+       'Education', 'Human Health And Social Work Activities',
+       'Arts, Entertainment And Recreation', 'Other Service Activities',
+       'Activities Of Households As Employers; Undifferentiated Goods- And Services-Producing Activities Of Households For Own Use',
+       'Activities Of Extraterritorial Organizations And Bodies']
     
     # using dictionary comprehension 
     # to convert lists to dictionary 
