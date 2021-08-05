@@ -251,37 +251,39 @@ def prediction(filePath):
     #converting array of predictions to list
     working_poor_list = results_working_poor.astype(int).tolist()
     total_employment_list = results_total_employment.astype(int).tolist()
+    print(len(working_poor_list))
+    print(len(total_employment_list))
 
     #getting results of prediction as dictionaries
-    working_poor_dict_pred_unsorted = return_pred_dict(results = working_poor_list)
-    total_employment_dict_pred_unsorted = return_pred_dict(results = total_employment_list)
+    #working_poor_dict_pred_unsorted = return_pred_dict(results = working_poor_list)
+    #total_employment_dict_pred_unsorted = return_pred_dict(results = total_employment_list)
     
     #sorting dict in descending order
-    working_poor_dict_pred = sort_dict(dict = working_poor_dict_pred_unsorted)
-    total_employment_dict_pred = sort_dict(dict = total_employment_dict_pred_unsorted)
+    #working_poor_dict_pred = sort_dict(dict = working_poor_dict_pred_unsorted)
+    #total_employment_dict_pred = sort_dict(dict = total_employment_dict_pred_unsorted)
 
 
     #computing percentage contribution by sector
-    working_poor_percent_dict_unsorted = compute_percent(dict = working_poor_dict_pred_unsorted)
-    total_employment_percent_dict_unsorted = compute_percent(dict = total_employment_dict_pred_unsorted)
+    #working_poor_percent_dict_unsorted = compute_percent(dict = working_poor_dict_pred_unsorted)
+    #total_employment_percent_dict_unsorted = compute_percent(dict = total_employment_dict_pred_unsorted)
     
     #sorting percent in descending order
-    working_poor_percent_dict = sort_dict(dict = working_poor_percent_dict_unsorted)
-    total_employment_percent_dict = sort_dict(dict = total_employment_percent_dict_unsorted)
+    #working_poor_percent_dict = sort_dict(dict = working_poor_percent_dict_unsorted)
+    #total_employment_percent_dict = sort_dict(dict = total_employment_percent_dict_unsorted)
 
     #computing percentage of working poor
-    total_working_poor = compute_total(dict = working_poor_dict_pred_unsorted)
-    total_employment_total = compute_total(dict = total_employment_dict_pred_unsorted)
-    percent = (total_working_poor/total_employment_total)*100
-    working_poor_percent = round(percent, 2)
+    #total_working_poor = compute_total(dict = working_poor_dict_pred_unsorted)
+    #total_employment_total = compute_total(dict = total_employment_dict_pred_unsorted)
+    #percent = (total_working_poor/total_employment_total)*100
+    #working_poor_percent = round(percent, 2)
     
     #rendering results
-    return render_template('prediction.html', 
-        working_poor_dict_pred = working_poor_dict_pred, 
-        total_employment_dict_pred = total_employment_dict_pred,
-        working_poor_percent_dict = working_poor_percent_dict,
-        total_employment_percent_dict = total_employment_percent_dict,
-        working_poor_percent = working_poor_percent)
+    #return render_template('prediction.html', 
+    #    working_poor_dict_pred = working_poor_dict_pred, 
+    #    total_employment_dict_pred = total_employment_dict_pred,
+     #   working_poor_percent_dict = working_poor_percent_dict,
+     #   total_employment_percent_dict = total_employment_percent_dict,
+     #   working_poor_percent = working_poor_percent)
 
 
 
