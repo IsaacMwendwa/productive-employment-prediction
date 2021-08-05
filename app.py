@@ -54,7 +54,7 @@ def return_prediction(model,scaler,dataset):
 
     values = reframed.values
 
-    pred_X, pred_y = values[:, :-1], values[:, -1]
+    pred_X = values[:, :-1]
     # reshape input to be 3D [samples, timesteps, features]
     pred_X = pred_X.reshape((pred_X.shape[0], 1, pred_X.shape[1]))
     print(pred_X.shape)
@@ -64,7 +64,7 @@ def return_prediction(model,scaler,dataset):
     yhat = model.predict(pred_X)
 
     # reshaping values
-    dataset_x = pred_X.reshape((pred.shape[0], pred_X.shape[2]))
+    dataset_x = pred_X.reshape((pred_X.shape[0], pred_X.shape[2]))
 
     # invert scaling for forecast
     inv_yhat = concatenate((yhat, dataset_x[:, 1:]), axis=1)
