@@ -12,66 +12,63 @@ from math import sqrt
 from pandas import DataFrame
 from pandas import concat
 
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.compose import ColumnTransformer
 
-# convert series to supervised learning
-def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
-	n_vars = 1 if type(data) is list else data.shape[1]
-	df = DataFrame(data)
-	cols, names = list(), list()
-	# input sequence (t-n, ... t-1)
-	for i in range(n_in, 0, -1):
-		cols.append(df.shift(i))
-		names += [('var%d(t-%d)' % (j+1, i)) for j in range(n_vars)]
-	# forecast sequence (t, t+1, ... t+n)
-	for i in range(0, n_out):
-		cols.append(df.shift(-i))
-		if i == 0:
-			names += [('var%d(t)' % (j+1)) for j in range(n_vars)]
-		else:
-			names += [('var%d(t+%d)' % (j+1, i)) for j in range(n_vars)]
-	# put it all together
-	agg = concat(cols, axis=1)
-	agg.columns = names
-	# drop rows with NaN values
-	if dropnan:
-		agg.dropna(inplace=True)
-	return agg
 
-def return_prediction(model,scaler,dataset):
+# Pipeline for pre-processing data: Scaling and numerical transformation
+def num_pipeline_transformer(data):
+    '''
+    Function to process numerical transformations
+    Argument:
+        data: original dataframe 
+    Returns:
+        num_attrs: numerical dataframe
+        num_pipeline: numerical pipeline object
+        
+    '''
+    numerics = ['float64', 'int64']
+
+    num_attrs = data.select_dtypes(include=numerics)
+
+    num_pipeline = Pipeline([
+        ('std_scaler', StandardScaler()),
+        ])
+    return num_attrs, num_pipeline
+
+# Pipeline for pre-processing data: One hot encoding
+def pipeline_transformer(data):
+    '''
+    Complete transformation pipeline for both
+    nuerical and categorical data.
     
-    # SCALING
-    values = dataset.values
-    # ensure all data is float
-    values = values.astype('float32')
-    # normalize features
-    scaled = scaler.fit_transform(values)
+    Argument:
+        data: original dataframe 
+    Returns:
+        prepared_data: transformed data, ready to use
+    '''
+    cat_attrs = ["Industry"]
+    num_attrs, num_pipeline = num_pipeline_transformer(data)
+    full_pipeline = ColumnTransformer([
+        ("num", num_pipeline, list(num_attrs)),
+        ("cat", OneHotEncoder(), cat_attrs),
+        ])
+    prepared_data = full_pipeline.fit_transform(data)
+    return prepared_data
 
-    # frame as supervised learning
-    reframed = series_to_supervised(scaled, 1, 1)
-
-    # drop columns I don't want to predict
-    reframed.drop(reframed.columns[25:], axis=1, inplace=True)
-
-    values = reframed.values
-
-    pred = values[:, :-1]
-    # reshape input to be 3D [samples, timesteps, features]
-    pred = pred.reshape((pred.shape[0], 1, pred.shape[1]))
-    print(pred.shape)
+def return_prediction(model, dataset):
     
+    # preparing data using pipeline transformer
+    prepared_data = pipeline_transformer(dataset)
 
+    print(prepared_data.shape)
+    
     # make a prediction
-    yhat = model.predict(pred)
+    predictions = model.predict(prepared_data)
 
-    # reshaping values
-    dataset_x = pred.reshape((pred.shape[0], pred.shape[2]))
-
-    # invert scaling for forecast
-    inv_yhat = concatenate((yhat, dataset_x[:, 1:]), axis=1)
-    inv_yhat = scaler.inverse_transform(inv_yhat)
-    inv_yhat = inv_yhat[:, 0]
-
-    return inv_yhat
+    return predictions
 
 
 #function to generate a dictionary from two lists
@@ -104,7 +101,7 @@ def return_pred_dict(results):
     return dict_pred
 
 
-#fucntion for sorting dict in descending order
+#function for sorting dict in descending order
 def sort_dict(dict):
     #Sorting dict in descending order
     sorted_dict = {}
@@ -148,12 +145,11 @@ app = Flask(__name__, template_folder="templates")
 # enable debugging mode
 app.config["DEBUG"] = True
 
-
 # LOADING THE MODEL AND THE SCALER
-working_poor_model = load_model("predictive_analysis_of_Wage_bracket_0_to_9999_model.h5")
-total_employment_model = load_model("predictive_analysis_of_Total_number_in_wage_employment_model.h5")
-working_poor_scaler = joblib.load("wage_employment_scaler.pkl")
-total_employment_scaler = joblib.load("total_employment_scaler.pkl")
+working_poor_model = load_model("working_poor_model.bin")
+total_employment_model = load_model("total_employment_model.bin")
+#working_poor_scaler = joblib.load("wage_employment_scaler.pkl")
+#total_employment_scaler = joblib.load("total_employment_scaler.pkl")
 
 # Upload folder
 UPLOAD_FOLDER = 'static/files'
@@ -190,85 +186,40 @@ def uploadFiles():
 
 @app.route('/prediction/<path:filePath>')
 def prediction(filePath):
-    # dummy row
-    from datetime import datetime
-    df1 = pd.DataFrame({
-        #'Year':[datetime.strptime('01-01-18', '%m-%d-%y')], 
-        #'Year':['01-01-18'],
-        'Year': ['01-01-18'],
-        'Wage_bracket_0_to_9999':[20000], 
-        'Total_number_in_wage_employment':[1002300], 
-        'Contribution_by_Gdp':[9.6], 
-        'Growth_of_GDP':[2.4], 
-        'Industry':["Agriculture, Forestry And Fishing"]
-    })
 
     #READING DATASET FOR WORKING POOR
     # CSV Column Names
-    col_names = ['Year', 'Wage_bracket_0_to_9999', 'Total_number_in_wage_employment', 'Contribution_by_Gdp', 'Growth_of_GDP', 'Industry']
+    col_names = ['Contribution_by_Gdp', 'Growth_of_GDP', 'Industry']
     # Use Pandas to parse the CSV file
-    df2 = read_csv(filePath, names = col_names, header=0)
-
-    # Append df2 at the end of df1
-    df = df1.append(df2, ignore_index = True)
-    df.set_index('Year', inplace=True)
+    working_poor_df = read_csv(filePath, names = col_names, header=0)
 
     #Cleaning dataset
-    cols = ['Wage_bracket_0_to_9999', 'Total_number_in_wage_employment']
-    df[cols] = df[cols].astype(str)  # cast to string
+    #cols = ['Wage_bracket_0_to_9999', 'Total_number_in_wage_employment']
+    #df[cols] = df[cols].astype(str)  # cast to string
 
     # Removing special characters
-    df[cols] = df[cols].replace({'\$': '', ',': '', '-': ''}, regex=True)
+    #df[cols] = df[cols].replace({'\$': '', ',': '', '-': ''}, regex=True)
 
-    dataset=df
-
-    #ONE-HOT ENCODING
-    # generate binary values using get_dummies
-    dum_df = get_dummies(dataset, columns=['Industry'] )# merge with main df bridge_df on key values
-    #dataset = dataset.merge(dum_df)
-    #dataset
-    #dataset = dum_df
-
-    #dataframe for working poor
-    dataset = dum_df
-    dataset.drop('Total_number_in_wage_employment', axis=1, inplace=True)
-    working_poor_df = dataset
+    #working_poor_df = df
 
     #READING DATASET FOR TOTAL EMPLOYMENT
     # CSV Column Names
-    col_names = ['Year', 'Wage_bracket_0_to_9999', 'Total_number_in_wage_employment', 'Contribution_by_Gdp', 'Growth_of_GDP', 'Industry']
+    col_names = ['Contribution_by_Gdp', 'Growth_of_GDP', 'Industry']
     # Use Pandas to parse the CSV file
-    df_total = read_csv(filePath, names = col_names, header=0, index_col=0)
-
-    # Append df2 at the end of df1
-    df = df1.append(df_total, ignore_index = True)
-    df.set_index('Year', inplace=True)
+    total_employment_df = read_csv(filePath, names = col_names, header=0)
 
     #Cleaning dataset
-    cols = ['Wage_bracket_0_to_9999', 'Total_number_in_wage_employment']
-    df[cols] = df[cols].astype(str)  # cast to string
+    #cols = ['Wage_bracket_0_to_9999', 'Total_number_in_wage_employment']
+    #df[cols] = df[cols].astype(str)  # cast to string
 
     # Removing special characters
-    df[cols] = df[cols].replace({'\$': '', ',': '', '-': ''}, regex=True)
+    #df[cols] = df[cols].replace({'\$': '', ',': '', '-': ''}, regex=True)
 
-    dataset=df
-
-    #ONE-HOT ENCODING
-    # generate binary values using get_dummies
-    dum_df = get_dummies(dataset, columns=['Industry'] )# merge with main df bridge_df on key values
-    #dataset = dataset.merge(dum_df)
-    #dataset
-    #dataset = dum_df
-
-    #dataframe for total employment
-    dataset = dum_df
-    dataset.drop('Wage_bracket_0_to_9999', axis=1, inplace=True)
-    total_employment_df = dataset
     
     #predictions for working poor
-    results_working_poor = return_prediction(model = working_poor_model, scaler = working_poor_scaler, dataset = working_poor_df)
+    results_working_poor = return_prediction(model = working_poor_model, dataset = working_poor_df)
     #predictions for total employment
-    results_total_employment = return_prediction(model = total_employment_model, scaler = total_employment_scaler, dataset = total_employment_df)
+    results_total_employment = return_prediction(model = total_employment_model, dataset = total_employment_df)
 
     #converting array of predictions to list
     working_poor_list = results_working_poor.astype(int).tolist()
@@ -283,7 +234,6 @@ def prediction(filePath):
     #sorting dict in descending order
     working_poor_dict_pred = sort_dict(dict = working_poor_dict_pred_unsorted)
     total_employment_dict_pred = sort_dict(dict = total_employment_dict_pred_unsorted)
-
 
     #computing percentage contribution by sector
     working_poor_percent_dict_unsorted = compute_percent(dict = working_poor_dict_pred_unsorted)
