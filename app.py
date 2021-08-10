@@ -4,9 +4,8 @@ from os.path import join, dirname, realpath
 
 import numpy as np  
 import pandas as pd
+import pickle
 from pandas import read_csv, get_dummies
-from tensorflow.keras.models import load_model
-import joblib
 from numpy import concatenate
 from math import sqrt
 from pandas import DataFrame
@@ -146,8 +145,13 @@ app = Flask(__name__, template_folder="templates")
 app.config["DEBUG"] = True
 
 # LOADING THE MODEL AND THE SCALER
-working_poor_model = load_model("working_poor_model.bin")
-total_employment_model = load_model("total_employment_model.bin")
+with open("working_poor_model.bin", 'rb') as f_in:
+    working_poor_model = pickle.load(f_in)
+
+with open("total_employment_model.bin", 'rb') as f_in:
+    total_employment_model = pickle.load(f_in)
+#working_poor_model = load_model("working_poor_model.bin")
+#total_employment_model = load_model("total_employment_model.bin")
 #working_poor_scaler = joblib.load("wage_employment_scaler.pkl")
 #total_employment_scaler = joblib.load("total_employment_scaler.pkl")
 
