@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Predictive Analysis of Wage Employment Based on Economic Growth in Kenya</title>
+  <title>Predictive Analysis of Productive Employment Based on Economic Growth in Kenya</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -58,7 +58,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Predictive Analysis of Wage Employment Based on Economic Growth in Kenya</a>
+        <a class="navbar-brand" href="#">Predictive Analysis of Productive Employment Based on Economic Growth in Kenya</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
       </div>
@@ -79,19 +79,24 @@
       </div>
 
       <div class="col-sm-8 text-left">
-        <h1>Predictive Analysis of Wage Employment</h1>
-        <p>Welcome to do a predictive analysis of wage employment based on economic growth in Kenya. Specifically, we
+        <h1>Predictive Analysis of Productive Employment</h1>
+        <p>Welcome to do a predictive analysis of productive employment based on economic growth in Kenya. Specifically, we
           will be predicting the number of people earning below the poverty line
-          (Wage_bracket_0_to_10000). This group is referred to as the working poor. Moreover,
-          we will also predict the total number of people in employment
+          (Wage_bracket_0_to_10000), per industry. This group is referred to as the working poor. Moreover,
+          we will also predict the total number of people in employment per industry.
         </p>
-        <p>The prediction problem is formulated as: Given the economic growth indicators
-          and the number of people in the working poor bracket/ total number in employment, at
-          the prior time step(year), predict the number in the current time step(year) </p>
+        <p>This predictive analytics project seeks to provide actionable insights to drive policy making and action,
+          which will guarantee the attainment of Sustainable Development Goals (SDGs) Number 8, which is to "Promote 
+          sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all."
+        </p>
+        <p>The prediction problem is formulated as: Given the economic growth indicators (Contribution by GDP, Growth of GDP)
+          by sector or industry, predict the number of people in non-productive employment (working poor) and the total number of people
+          in employment per sector/industry.
+        </p>
         <h3>Uploading CSV Document</h3>
         <p>Please proceed to download sample test CSV files containing input data from the left sidebar</p>
         <p>Upload the downloaded file to get the predictions for the next year</p>
-        <p>The model will then predict the number of people in Wage_bracket_0_to_10000, and also the
+        <p>The system will then use predictive models to predict the number of people in Wage_bracket_0_to_10000, and also the
           Total_number_in_wage_employment</p>
         <p>The results gotten are for each Industry/Sector e.g Agriculture, Manufacturing, Education e.t.c</p>
         <form method="POST" action="" enctype="multipart/form-data">
@@ -103,9 +108,6 @@
       <div class="col-sm-2 sidenav">
         <div class="well">
           <p><b>Input Variables</b></p>
-          <p>Year</p>
-          <p>Wage bracket 0 to 9999</p>
-          <p>Total number in wage employment</p>
           <p>Contribution to GDP</p>
           <p>Growth of GDP</p>
           <p>Industry (Sectors)</p>
@@ -122,7 +124,7 @@
   </div>
 
   <footer class="container-fluid text-center">
-    <p>Predictive Analysis of Wage Employment in Kenya</p>
+    <p>Predictive Analysis of Productive Employment in Kenya</p>
   </footer>
 </body>
 
