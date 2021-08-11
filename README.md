@@ -3,7 +3,7 @@
 ## Current App Link: https://wage-employment-prediction.herokuapp.com/
 
 ## Introduction
-This project is aimed at creating a web-based application to perform a Predictive Analysis of Productive Employment in Kenya. The project uses the LSTM neural network for the time-series forecasting problem
+This project is aimed at providing actionable insights to support SDG Number 8, by allowing users/stakeholders to do a Predictive Analysis of Productive Employment in Kenya based on Economic Growth. The project uses supervised learning algorithms for the regression problem: Given the economic growth metrics (Contribution to GDP, Growth by GDP) according to Industry, predict the number of people in non-productive employment (working poor) and the total number in employment; per Industry.
 
 ## Table of Contents
 * [Build_Tools](#Build_Tools)
