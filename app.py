@@ -189,7 +189,7 @@ def prediction(filePath):
 
     #READING DATASET FOR WORKING POOR
     # CSV Column Names
-    col_names = ['Contribution_by_Gdp', 'Growth_of_GDP', 'Industry']
+    col_names = ['Industry', 'Contribution_by_Gdp', 'Growth_of_GDP']
     # Use Pandas to parse the CSV file
     working_poor_df = read_csv(filePath, names = col_names, header=0)
 
@@ -215,6 +215,7 @@ def prediction(filePath):
     #Reorder columns
     cols = ['Contribution_by_Gdp', 'Growth_of_GDP', 'Industry']
     total_employment_df = total_employment_df.reindex(columns = cols)
+    #total_employment_df.head()
 
     #Cleaning dataset
     #cols = ['Wage_bracket_0_to_9999', 'Total_number_in_wage_employment']
