@@ -150,10 +150,6 @@ with open("working_poor_model.bin", 'rb') as f_in:
 
 with open("total_employment_model.bin", 'rb') as f_in:
     total_employment_model = pickle.load(f_in)
-#working_poor_model = load_model("working_poor_model.bin")
-#total_employment_model = load_model("total_employment_model.bin")
-#working_poor_scaler = joblib.load("wage_employment_scaler.pkl")
-#total_employment_scaler = joblib.load("total_employment_scaler.pkl")
 
 # Upload folder
 UPLOAD_FOLDER = 'static/files'
@@ -197,6 +193,10 @@ def prediction(filePath):
     # Use Pandas to parse the CSV file
     working_poor_df = read_csv(filePath, names = col_names, header=0)
 
+    #Reorder columns
+    cols = ['Contribution_by_Gdp', 'Growth_of_GDP', 'Industry']
+    working_poor_df = working_poor_df.reindex(columns=cols)
+
     #Cleaning dataset
     #cols = ['Wage_bracket_0_to_9999', 'Total_number_in_wage_employment']
     #df[cols] = df[cols].astype(str)  # cast to string
@@ -208,9 +208,13 @@ def prediction(filePath):
 
     #READING DATASET FOR TOTAL EMPLOYMENT
     # CSV Column Names
-    col_names = ['Contribution_by_Gdp', 'Growth_of_GDP', 'Industry']
+    col_names = ['Industry', 'Contribution_by_Gdp', 'Growth_of_GDP']
     # Use Pandas to parse the CSV file
     total_employment_df = read_csv(filePath, names = col_names, header=0)
+
+    #Reorder columns
+    cols = ['Contribution_by_Gdp', 'Growth_of_GDP', 'Industry']
+    total_employment_df = total_employment_df.reindex(columns = cols)
 
     #Cleaning dataset
     #cols = ['Wage_bracket_0_to_9999', 'Total_number_in_wage_employment']
