@@ -3,7 +3,7 @@
 Welcome to the model building section
 
 ## PRE-REQUISITES
-* Dwonload the statistical Abstracts from the Kenya National Bureau of Statistics Website
+* Download the statistical Abstracts from the Kenya National Bureau of Statistics Website
 * You can also access them using the Google Drive folder: https://drive.google.com/drive/u/0/folders/1agLHP0I2fTDuB6N-ij54s8bsF2Aia716
 
 ## OVERVIEW
