@@ -1,6 +1,6 @@
 # Predictive Analysis of Productive Employment in Kenya
 
-## Current App Link: https://wage-employment-prediction.herokuapp.com/
+## Current App Link: https://wage-employment-prediction.herokuapp.com/ (Outdated, new link to be posted soon)
 
 ## Introduction
 This project is aimed at providing actionable insights to support SDG Number 8, by allowing users/stakeholders to do a Predictive Analysis of Productive Employment in Kenya based on Economic Growth. The project uses machine learning algorithms for the regression problem: Given the economic growth metrics (Contribution to GDP, Growth by GDP) according to Industry, predict the number of people in non-productive employment (working poor) and the total number in employment; per Industry.
